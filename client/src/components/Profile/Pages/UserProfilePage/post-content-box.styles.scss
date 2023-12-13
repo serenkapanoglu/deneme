@@ -1,0 +1,29 @@
+.createbox-container {
+    display: flex;
+    position: relative;
+    float: right;
+    align-items: center;
+    height: 150px;
+    width: 75%;
+    justify-content: center;
+    border-bottom: 3px solid #3F4452;
+}
+
+.searchbox {
+    background-color: #3F4452;
+    width: 70%;
+    height: 50px;
+    border: 1px solid #3F4452;
+    border-radius: 15px;
+    display: flex;
+    margin-left: 10px;
+    padding-top: 10px;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-bottom: 5px;
+    overflow: hidden;
+    overflow-wrap: break-word;
+    min-height: 50px;
+    max-height: 140px;
+    color: white;
+}

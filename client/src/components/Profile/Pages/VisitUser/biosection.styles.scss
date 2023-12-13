@@ -1,0 +1,23 @@
+.biosectioncontainer {
+    display: flex;
+    flex-direction: row;
+    position: fixed;
+    left: 570px;
+    top: 750px;
+}
+
+.bioimg {
+    width: 200px;
+    height: auto;
+}
+
+.biotextcontainer {
+    width: 75%;
+}
+
+.biotext {
+    display: flex;
+    position: relative;
+    margin-top: 40px;
+    margin-left: 10px;
+}

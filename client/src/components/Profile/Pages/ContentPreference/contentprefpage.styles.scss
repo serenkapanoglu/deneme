@@ -1,0 +1,56 @@
+.contentprefpage {
+    width: 100%;
+    height: 92.5vh;
+    color: white;
+    display: flex;
+    flex-direction: column;
+}
+
+.contentprefitem {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    width: 5%;
+    margin-left: 50px;
+    margin-top: 30px;
+}
+
+.contentpreftitle {
+    margin-top: 35px;
+    padding-left: 10px;
+    background: none;
+    border: none;
+    font-size: 20px;
+    color: white;
+}
+
+.addsignimg {
+    width: 2%;
+    height: auto;
+    margin-left: 47px;
+}
+
+.contentprefsearch {
+    background-color: #151a1f;
+    color: white;
+    width: 1500%;
+    height: 6vh;
+    border-radius: 25px;
+    border: 2px solid white;
+    align-content: center;
+    padding-left: 10px;
+    margin-top: 25px;
+}
+
+.contentpreftagssec {
+    margin-left: 50px;
+    margin-top: 40px;
+    display: flex;
+    flex-direction: row;
+}
+
+.contentprefusersec {
+    margin-left: 50px;
+    margin-top: 40px;
+    display: flex;
+}

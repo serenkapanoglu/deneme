@@ -1,0 +1,36 @@
+.currency-container {
+    background-color: #151a1f;
+    display: flex;
+    flex-direction: row;
+    position: relative;
+    float: left;
+    width: 25%;
+    height: auto;
+    color: white;
+    justify-content: center;
+    z-index: 10;
+    position: sticky;
+}
+
+.currencyitems {
+    width: 75%;
+    height: auto;
+    display: flex;
+    flex-direction: row;
+    margin-left: -30px;
+}
+
+.currencyfigurestar {
+    padding-right: 10px;
+    width: 15%;
+    height: auto;
+}
+
+.currencyfiguredollar {
+    padding-right: 10px;
+}
+
+.currencyfigure {
+    padding-right: 30px;
+    padding-top: 15px;
+}

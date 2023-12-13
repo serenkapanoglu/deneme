@@ -1,0 +1,24 @@
+.settingspage {
+    width: 100%;
+    height: 92.5vh;
+    color: white;
+    display: flex;
+    position: relative;
+    align-items: flex-start;
+}
+
+.settingstitle {
+    margin-top: 30px;
+    padding-left: 10px;
+    background: none;
+    border: none;
+    color: white;
+    font-size: 15px;
+}
+
+.settingimage {
+    width: 2%;
+    height: auto;
+    margin-top: 25px;
+    margin-left: 47px;
+}

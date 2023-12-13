@@ -1,0 +1,24 @@
+.root {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 24px 16px;
+  min-width: 205px;
+  border: none;
+  border-radius: 30px;
+  cursor: pointer;
+  text-transform: uppercase;
+  font-size: 18;
+  letter-spacing: 2px;
+}
+
+.contained {
+  background: var(--color-button);
+  color: var(--color-button-text);
+}
+
+.outlined {
+  background: transparent;
+  color: var(--color-accent);
+  border: 1px solid var(--color-accent);
+}
