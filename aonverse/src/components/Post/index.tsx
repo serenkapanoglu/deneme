@@ -20,13 +20,14 @@ import defaultImg from '/crowns/1.png';
 import silverCrown from '/crowns/2.png';
 import bronzeCrown from '/crowns/3.png';
 import star from '/other/star.png';
+import axios from "axios";
 import { CreateRepostModal } from "../../modals/CreateRepostModal";
 
 //@ts-ignore
 const s = "text-[var(---color-yellow)]";
 
-export default function Post(props: { data: PostData, index: string }) {
-  const { data, index } = props;
+export default function Post(props: { data: PostData, index: string, user:any }) {
+  const { data, index,user } = props;
 
   const numericIndex = parseInt(index, 10); // Assuming base 10
   const displayIndex = !isNaN(numericIndex) ? numericIndex + 1 : 0;
@@ -44,7 +45,7 @@ export default function Post(props: { data: PostData, index: string }) {
   });
   const [isLiked, setLiked] = useState(() => {
     const likedInStorage = localStorage.getItem(`isLiked_${data._id}`);
-    return likedInStorage ? JSON.parse(likedInStorage) : false;
+    return likedInStorage ==='true';
   });
   
   const [starCount, setStarCount] = useState(() => {
@@ -53,7 +54,7 @@ export default function Post(props: { data: PostData, index: string }) {
   });
   const [isStarred, setStarred] = useState(() => {
     const starredInStorage = localStorage.getItem(`isStarred_${data._id}`);
-    return starredInStorage ? JSON.parse(starredInStorage) : false;
+    return starredInStorage ==='true';
   });
   const [isReposted, setReposted] = useState(false);
   
@@ -76,34 +77,61 @@ export default function Post(props: { data: PostData, index: string }) {
       return <img src={goldCrown } className='w-23 px-5' />;
     }
   };
-
-
-  const handleLikeClick = () => {
+  
+ 
+  const handleLikeClick = async() => {
     try {
-      setLikeCount((prevCount) => (isLiked ? prevCount - 1 : prevCount + 1));
-      setLiked((prevLiked: boolean) => !prevLiked);
+      let raw = JSON.stringify({
+        "id":data._id,
+        "user":data.user,
+        "slug":data.slug,
+        "likes":1,
+        "likesUsers":user._id,
+      });
+      const result = await axios.patch(`http://localhost:8000/posts/${data._id}`, raw,{
+        headers:{
+          'Content-Type':'application/json',
+        }
+      });
+      console.log(result);
+     
+  } catch (error) {
+    console.error("Error updating like count:", error);
+  }
+}; 
   
-      // Update localStorage after the state is updated
-      localStorage.setItem(`isLiked_${data._id}`, JSON.stringify(!isLiked));
-      localStorage.setItem(`likeCount_${data._id}`, String(likeCount + (isLiked ? -1 : 1)));
-    } catch (error) {
-      console.error("Error updating like count:", error);
-    }
-  };
-  
-  
-  const handleStarClick = () => {
+
+			
+  const handleStarClick = async() => {
+   
     try {
-      setStarCount((prevCount) => prevCount + 1);
-      setStarred(true);
-  
-      // Update localStorage after the state is updated
-      localStorage.setItem(`isStarred_${data._id}`, JSON.stringify(true));
-      localStorage.setItem(`starCount_${data._id}`, String(starCount + 1));
+      let raw = JSON.stringify({
+        "id":data._id,
+        "user":data.user,
+        "slug":data.slug,
+        "stars":1,
+        "starDonator":user._id,
+        "likes":data.likes,
+        "likesUsers":data.likesUsers,
+        
+      });
+      const result = await axios.patch(`http://localhost:8000/posts/${data._id}`, raw,{
+        headers:{
+          'Content-Type':'application/json',
+        }
+      });
+      console.log(result);
+     
+      
     } catch (error) {
       console.error("Error updating star count:", error);
     }
   };
+  
+
+
+
+
   
   useEffect(() => {
     try {
@@ -132,6 +160,7 @@ export default function Post(props: { data: PostData, index: string }) {
 
     fetchInitialLikeCount();
   }, [data._id]);
+
 
   useEffect(() => {
     const fetchInitialStarCount = async () => {
@@ -241,7 +270,7 @@ export default function Post(props: { data: PostData, index: string }) {
           ) : (
             <HeartOutlineIcon className="h-[24px] w-[24px] <md:h-[20px] <md:w-[20px]" />
           )}
-          <Box className="text-[20px] <md:text-[16px]">{likeCount}</Box>
+          <Box className="text-[20px] <md:text-[16px]">{data.likes}</Box>
         </Box>
 
 
@@ -255,7 +284,7 @@ export default function Post(props: { data: PostData, index: string }) {
           ) : (
             <StarOutlineIcon className="h-[24px] w-[24px] <md:h-[20px] <md:w-[20px]" />
           )}
-          <Box className="text-[20px] <md:text-[16px]">{starCount}</Box>
+          <Box className="text-[20px] <md:text-[16px]">{data.stars}</Box>
         </Box>
 
 

@@ -404,12 +404,26 @@ const updateTenStarPostAchievements = async (id) => {
   console.log("Running Update Ten Star Post Achievements", id);
   try {
     const user = await User.findOne({ slug: id }).exec();
-    if (user.slug) {
+    if(!user){
+      //console.error('Kullanici bulunamadi', id);
+      return;
+    }
+    /*if (user.slug) {
       const topStarredPost =await Post.find({ slug: user.slug, stars: { $lt: 10 } }).sort({ stars: -1 }).limit(1);
 
       user.achievements[0].progress = topStarredPost[0].stars;
 
       await user.save();
+    }*/
+    if (user.slug) {
+      const topStarredPost = await Post.find({ slug: user.slug, stars: { $lt: 10 } }).sort({ stars: -1 }).limit(1);
+    
+      if (topStarredPost && topStarredPost.length > 0) {
+        user.achievements[0].progress = topStarredPost[0].stars;
+        await user.save();
+      } else {
+        console.error('No top starred post found for user with slug:', user.slug);
+      }
     }
 
     console.log("Achievements updated successfully.");

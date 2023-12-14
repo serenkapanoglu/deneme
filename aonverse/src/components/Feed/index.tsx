@@ -87,7 +87,7 @@ export default function Feed(props: {
         {[
           /* Posts */
           chain(posts || [])
-            .map((data, i) => <Post data={data} index={`${i}`} key={`post-${i}`} />)
+            .map((data, i) => <Post data={data} index={`${i}`} user={user} key={`post-${i}`} />)
             /* add a suggested user section after every 4 posts */
             .chunk(4)
             .flatMap((chunk, i) => [
